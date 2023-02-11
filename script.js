@@ -25,31 +25,37 @@ function writePassword() {
         alert("You must pick SOMETHING!");
     };
    
-    // Create arrays to use for password characters
-    var capitalLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    var lowercaseLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-    var specialCharacters = ['[`!@#$%^&*()_+-=[]{};\':"\\|,.<>/?~]/'];
+    // Create strings to use for password characters
+    var capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+    var numbers = "1234567890";
+    var specialCharacters = "\'[`!@#$%^&*()_+-=[]{};\:\"";
     
     // Create password.  
     function generatePassword(){
         var password = '';
-        var characters = [getLowercase, getUppercase, getNumbers, getSpecialCharacters];
-        var charactersChoice = [];
         var characterPool;
-    // Made array for the characters that are asked for.
-        for (var i = 0; i < characters.length; i++ ){
-            if (characters[i]){
-                console.log(characters)
-                charactersChoice.push(characters[i]);
-            }
+    
+    //    Add character choices to character pool
+        if (getLowercase){
+            characterPool = characterPool + lowercaseLetters;
         }
-
-        console.log(charactersChoice)
-        for (var i = 0; i < charactersChoice.length; i++){
-            characterPool = characterPool.concat(charactersChoice[i])
+        if (getUppercase){
+            characterPool = characterPool + capitalLetters;
+        }
+        if (getNumbers){
+            characterPool = characterPool + numbers;
+        }
+        if(getSpecialCharacters){
+            characterPool = characterPool + specialCharacters;
         }
         console.log(characterPool)
+        // Random character select from pool
+        for (i = 0; i < getPasswordLength; i++){
+            password = password + characterPool.charAt(Math.floor(Math.random() * characterPool.length));
+        }
+        return password
+
     }
     
     var password = generatePassword();
