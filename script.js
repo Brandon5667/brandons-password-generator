@@ -10,9 +10,11 @@ function writePassword() {
     var getPasswordLength = prompt("Pick your Password length of at least 8 characters and no more than 128 characters.")
     if (getPasswordLength < 8){
         alert("Password must contain at least 8 characters!")
+        return
     }
     else if (getPasswordLength > 128){
         alert("Password can't contain more than 128 characters!")
+        return
     }
     else
 // Ask user what characters they want to use.
